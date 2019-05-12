@@ -14,6 +14,10 @@ class Calculator {
 
 	// select the operator to perform calculation
 	selectOperator(operator) {
+		if (this.currentOperatnd === '') return;
+		if (this.previousOperand !== '') {
+			this.makeCalculation();
+		}
 		this.operator = operator;
 		this.previousOperand = this.currentOperand;
 		this.currentOperand = '';
@@ -28,7 +32,31 @@ class Calculator {
 		this.operator = undefined;
 	}
 
-	makeCalculation() {}
+	makeCalculation() {
+		let calculation;
+		const previous = parseFloat(this.previousOperand);
+		const current = parseFloat(this.currentOperand);
+		if (isNaN(previous) || isNaN(current)) return;
+		switch (this.operator) {
+			case '+':
+				calculation = previous + current;
+				break;
+			case '-':
+				calculation = previous - current;
+				break;
+			case '*':
+				calculation = previous * current;
+				break;
+			case '/':
+				calculation = previous / current;
+				break;
+			default:
+				return;
+		}
+		this.currentOperand = calculation;
+		this.operator = undefined;
+		this.previousOperand = '';
+	}
 
 	// history and current displaying
 	updateOutputs() {
@@ -59,4 +87,9 @@ operatorButtons.forEach((button) => {
 		calculator.selectOperator(button.innerText);
 		calculator.updateOutputs();
 	});
+});
+
+equalsButton.addEventListener('click', (button) => {
+	calculator.makeCalculation();
+	calculator.updateOutputs();
 });
