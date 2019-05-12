@@ -13,8 +13,11 @@ body {
 	background: purple;
 }
 
-p {
-	margin: 20px;
+h4 {
+	font-size: 30px;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
 }
 button {
 	background: palevioletred;
@@ -68,18 +71,4 @@ button:hover {
 	background: linear-gradient(pink, blueviolet);
 	color: black;
 	font-size: 20px;
-}
-
-.number,
-.operator,
-.decimal {
-	background: pink;
-	height: 50px;
-	width: 50px;
-	font-weight: bolder;
-	font-size: 14px;
-}
-
-.tech-spec {
-	padding: 5px;
 }

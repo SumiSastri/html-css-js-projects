@@ -80,11 +80,15 @@ class Calculator {
 			return integerDisplay;
 		}
 	}
-
 	// history and current displaying
 	updateOutputs() {
 		this.printCurrent.innerText = this.currentOperand;
 		this.printHistory.innerText = this.previousOperand;
+		if (this.operator != null) {
+			this.printHistory.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operator}`;
+		} else {
+			this.printHistory.innerText = '';
+		}
 	}
 }
 
