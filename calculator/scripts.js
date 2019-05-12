@@ -6,15 +6,17 @@ class Calculator {
 		this.clearAll();
 	}
 
+	//select number, only one decimal and make number a string
 	selectNumber(number) {
-		if (number === '.' && this.printCurrent.includes(' . ')) return;
-		this.currentOperand = number;
-		// this.printCurrent.toString() + number.toString();
+		if (number === '.' && this.currentOperand.includes('.')) return;
+		this.currentOperand = this.currentOperand.toString() + number.toString();
 	}
+
+	// select the operator to perform calculation
 	selectOperator(operator) {
 		this.operator = operator;
-		this.previousOperator = this.currentOperator;
-		this.currentOperator = '';
+		this.previousOperand = this.currentOperand;
+		this.currentOperand = '';
 	}
 
 	clearOne() {}
@@ -23,41 +25,32 @@ class Calculator {
 	clearAll() {
 		this.currentOperand = '';
 		this.previousOperand = '';
-		this.operation = undefined;
+		this.operator = undefined;
 	}
 
 	makeCalculation() {}
 
+	// history and current displaying
 	updateOutputs() {
 		this.printCurrent.innerText = this.currentOperand;
+		this.printHistory.innerText = this.previousOperand;
 	}
 }
 
-// cache in memory - working up to here
 const numberButtons = document.querySelectorAll('[ data-number ]');
-// console.log(numberButtons);
 const operatorButtons = document.querySelectorAll('[ data-operator ]');
-// console.log(operatorButtons);
 const equalsButton = document.querySelector('[ data-equals ]');
-// console.log(equalsButton);
 const clearOneButton = document.querySelector('[ data-clear-one ]');
-// console.log(clearOneButton);
 const clearAllButton = document.querySelector('[ data-clear-all ]');
-// console.log(clearAllButton);
 const printHistory = document.querySelector('[ data-print-history ]');
-// console.log(printHistory);
 const printCurrent = document.querySelector('[ data-print-current ]');
-// console.log(printCurrent);
 
 const calculator = new Calculator(printHistory, printCurrent);
-// console.log(calculator);
 
 numberButtons.forEach((button) => {
 	button.addEventListener('click', () => {
 		calculator.selectNumber(button.innerText);
-		// console.log(calculator.selectNumber);
 		calculator.updateOutputs();
-		// console.log(calculator.updateOutputs);
 	});
 });
 
