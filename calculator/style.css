@@ -1,5 +1,8 @@
-* {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
+	font-family: 'Stylish', sans-serif;
 }
 html,
 body {
@@ -7,6 +10,7 @@ body {
 	margin: 0;
 	padding: 10px;
 	min-height: 100vh;
+	background: purple;
 }
 
 p {
@@ -15,29 +19,57 @@ p {
 button {
 	background: palevioletred;
 	font-family: 'Stylish', sans-serif;
-	margin: 4px;
-	padding: 4px;
+	cursor: pointer;
 	font-size: 14px;
-	height: 50px;
-	width: 50px;
+	border: 1 px, solid, white;
+	outline: none;
+}
+button:hover {
+	background-color: purple;
 }
 .calculator-styling {
 	background: linear-gradient(pink, blueviolet);
 	height: 450px;
 	width: 350px;
 	border: solid rgb(46, 10, 46);
+	padding: 20px;
 }
-.calculator-box {
-	height: 250px;
-	width: 250px;
-	border: solid rgb(46, 10, 46);
-	margin: auto;
+
+.calculator-grid {
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	min-height: 100vh;
+	grid-template-columns: repeat(4, 100px);
+	grid-template-rows: minmax(120px, auto) repeat(5, 100px);
 }
-.calculations {
+.span-two {
+	grid-column: span 2;
+}
+.print-output {
 	background: linear-gradient(pink, blueviolet);
-	width: 250px;
-	height: 25px;
+	grid-column: 1/ -1;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-around;
+	flex-direction: column;
+	word-wrap: break-word;
+	word-break: break-all;
+	padding: 10 px;
 }
+
+.print-output .print-history {
+	background: linear-gradient(pink, blueviolet);
+	color: white;
+	font-size: 16px;
+}
+
+.print-output .print-current {
+	background: linear-gradient(pink, blueviolet);
+	color: black;
+	font-size: 20px;
+}
+
 .number,
 .operator,
 .decimal {

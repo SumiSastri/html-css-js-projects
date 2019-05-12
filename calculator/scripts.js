@@ -1,41 +1,69 @@
-// add event listener to create arrays of numbers and operators
-const numbers = document.querySelectorAll('.number');
-// console.log(numbers); array of 10 numbers
-// select numbers - ensure it is a number not an operator, allow decimal
-function selectNumbers(a, b) {}
+//constructor with functions in them
+class Calculator {
+	constructor(printHistory, printCurrent) {
+		this.printHistory = printHistory;
+		this.printCurrent = printCurrent;
+		this.clearAll();
+	}
 
-const decimalButton = document.getElementById('decimal');
-// console.log(decimalButton);
-decimalButton.onclick = function() {};
-function handleDecimal() {}
+	selectNumber(number) {
+		if (number === '.' && this.printCurrent.includes(' . ')) return;
+		this.currentOperand = number;
+		// this.printCurrent.toString() + number.toString();
+	}
+	selectOperator(operator) {
+		this.operator = operator;
+		this.previousOperator = this.currentOperator;
+		this.currentOperator = '';
+	}
 
-// select operator
-const operators = document.querySelectorAll('.operator');
-// console.log(operators); array of 4 operators
-function selectOperator(operator) {}
-// print numbers and operators selected in history
-function printNumbers() {}
-function printOperators() {}
+	clearOne() {}
 
-const clearOne = document.getElementById('C');
-// console.log(clearOne); click action registered
-clearOne.onclick = function() {};
-// clear one number in history
-function clearOneHistory() {}
+	// clears all operations and numbers in the output section
+	clearAll() {
+		this.currentOperand = '';
+		this.previousOperand = '';
+		this.operation = undefined;
+	}
 
-const clearAll = document.getElementById('CE');
-// console.log(clearAll); click action registered
-clearAll.onclick = function() {};
-// clear all in history and start again
-function clearAllHistory() {}
+	makeCalculation() {}
 
-// add event listeners to unique buttons - equals, decimal, clear
-const equalsButton = document.getElementById('=');
-// console.log(equalsButton); click action registered
-equalsButton.onclick = function() {};
-// select equals and perform calculation
-function performCalculation() {}
-// show result
-function printAnswer() {}
-// clear all answers and start again
-function clearAllAnswers() {}
+	updateOutputs() {
+		this.printCurrent.innerText = this.currentOperand;
+	}
+}
+
+// cache in memory - working up to here
+const numberButtons = document.querySelectorAll('[ data-number ]');
+// console.log(numberButtons);
+const operatorButtons = document.querySelectorAll('[ data-operator ]');
+// console.log(operatorButtons);
+const equalsButton = document.querySelector('[ data-equals ]');
+// console.log(equalsButton);
+const clearOneButton = document.querySelector('[ data-clear-one ]');
+// console.log(clearOneButton);
+const clearAllButton = document.querySelector('[ data-clear-all ]');
+// console.log(clearAllButton);
+const printHistory = document.querySelector('[ data-print-history ]');
+// console.log(printHistory);
+const printCurrent = document.querySelector('[ data-print-current ]');
+// console.log(printCurrent);
+
+const calculator = new Calculator(printHistory, printCurrent);
+// console.log(calculator);
+
+numberButtons.forEach((button) => {
+	button.addEventListener('click', () => {
+		calculator.selectNumber(button.innerText);
+		// console.log(calculator.selectNumber);
+		calculator.updateOutputs();
+		// console.log(calculator.updateOutputs);
+	});
+});
+
+operatorButtons.forEach((button) => {
+	button.addEventListener('click', () => {
+		calculator.selectOperator(button.innerText);
+		calculator.updateOutputs();
+	});
+});
