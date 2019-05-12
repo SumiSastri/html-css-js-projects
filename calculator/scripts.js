@@ -31,7 +31,8 @@ class Calculator {
 		this.previousOperand = '';
 		this.operator = undefined;
 	}
-
+	// switch to select operator and calculation
+	// make sure only numbers chosen with NaN condition
 	makeCalculation() {
 		let calculation;
 		const previous = parseFloat(this.previousOperand);
@@ -91,5 +92,10 @@ operatorButtons.forEach((button) => {
 
 equalsButton.addEventListener('click', (button) => {
 	calculator.makeCalculation();
+	calculator.updateOutputs();
+});
+
+clearAllButton.addEventListener('click', (button) => {
+	calculator.clearAll();
 	calculator.updateOutputs();
 });
