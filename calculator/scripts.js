@@ -61,6 +61,25 @@ class Calculator {
 		this.operator = undefined;
 		this.previousOperand = '';
 	}
+	// handle decimal, format numbers
+	getDisplayNumber(number) {
+		const stringNumber = number.toString();
+		const integerNumbers = parseFloat(stringNumber.split('.')[0]);
+		const decimals = stringNumber.split('.')[1];
+		let integerDisplay;
+		if (isNaN(integerNumbers)) {
+			integerDisplay = '';
+		} else {
+			integerDisplay = integerNumbers.toLocaleString('en', {
+				maximumFractionDigits: 0
+			});
+		}
+		if (decimals != null) {
+			return `${integerDisplay}. ${decimals}`;
+		} else {
+			return integerDisplay;
+		}
+	}
 
 	// history and current displaying
 	updateOutputs() {
