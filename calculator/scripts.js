@@ -22,8 +22,11 @@ class Calculator {
 		this.previousOperand = this.currentOperand;
 		this.currentOperand = '';
 	}
+	// back-space slice one from array
 
-	clearOne() {}
+	clearOne() {
+		this.currentOperand = this.currentOperand.toString().slice(0, -1);
+	}
 
 	// clears all operations and numbers in the output section
 	clearAll() {
@@ -97,5 +100,10 @@ equalsButton.addEventListener('click', (button) => {
 
 clearAllButton.addEventListener('click', (button) => {
 	calculator.clearAll();
+	calculator.updateOutputs();
+});
+
+clearOneButton.addEventListener('click', (button) => {
+	calculator.clearOne();
 	calculator.updateOutputs();
 });
